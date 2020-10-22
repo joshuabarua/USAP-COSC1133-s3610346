@@ -1,0 +1,19 @@
+#!/bin/bash
+#########################Joshua Barua s3610346#########################
+#######################################################################
+
+# My github username connected with student email
+github_user="acancerouscake"
+
+
+# Get Updates
+sudo apt-get update
+
+# Install binaries required
+sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make
+
+# Repo with linux kernel to clone
+git clone --depth=1 https://github.com/raspberrypi/linux
+
+# Clone repository that contains config file
+git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
