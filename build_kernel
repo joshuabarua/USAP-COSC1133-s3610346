@@ -15,5 +15,33 @@ sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison fl
 # Repo with linux kernel to clone
 git clone --depth=1 https://github.com/raspberrypi/linux
 
-# Clone repository that contains config file
+# Clone repo file with config
 git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
+
+# Copy config file to linux repo
+cp ./USAP-COSC1133-s3610346/.config ../linux
+
+# Move into linux directory
+cd ../linux
+
+# Kernel Version
+KERNEL=kernel7l
+
+# Kernel starts make process
+make -j4 zImage modules dtbs
+
+# Installl modules
+sudo make modules_install
+
+# Backup old boot files
+sudo cp -r /boot/. /home/boot_backup
+
+#Compress boot back up file
+sudo tar -zcvf /home/boot_backup.tar.gz /home/boot_backup
+sudo rm -rf /home/boot_backup
+
+# Copy final files to required destinations
+sudo cp arch/arm/boot/dts/*.dtb /boot/
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
+sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
+sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
