@@ -19,16 +19,16 @@ git clone --depth=1 https://github.com/raspberrypi/linux
 git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
 
 # Copy config file to linux repo
-cp ./USAP-COSC1133-s3610346/.config ../linux
+cp ./USAP-COSC1133-s3610346/.config ./linux
 
 # Move into linux directory
-cd ../linux
+cd ./linux
 
 # Kernel Version
 KERNEL=kernel7l
 
 # Kernel starts make process
-make -j4 zImage modules dtbs
+sudo make -j4 zImage modules dtbs & sudo ../USAP-COSC1133-s3610346/vcgencmd
 
 # Installl modules
 sudo make modules_install
