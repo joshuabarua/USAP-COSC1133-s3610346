@@ -1,5 +1,5 @@
 #!/bin/bash
-#########################Joshua Barua s3610346#########################
+######################### Joshua Barua s3610346 #########################
 #######################################################################
 
 # My github username connected with student email
@@ -11,14 +11,14 @@ myUser=$(whoami)
 sudo usermod -aG video $myUser
 
 # Run temperature log script as background process
-sudo ./vcgencmd &> ./kernel_build_temp_data 
+./vcgencmd &> ./kernel_build_temp_data &
 
 # Grab process ID of vcgencmd script
 tempPID=$!
 
 # function tto kill pid for use in trap
 killFunc(){
-kill $tempPID
+kill -15 $tempPID
 exit
 }
 
@@ -26,19 +26,19 @@ exit
 trap "killFunc" USR1
 
 # Get Updates
-#sudo apt-get update
+sudo apt-get update
 
 # Install binaries required
-#sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make
+sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make
 
 # Repo with linux kernel to clone
-#git clone --depth=1 https://github.com/raspberrypi/linux
+git clone --depth=1 https://github.com/raspberrypi/linux
 
 # Clone repo file with config
-#git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
+git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
 
 # Copy config file to linux repo
-#cp ./USAP-COSC1133-s3610346/.config ./linux
+cp ./USAP-COSC1133-s3610346/.config ./linux
 
 # Move into linux directory
 cd ./linux
@@ -54,19 +54,19 @@ sudo make -j4 zImage modules dtbs
 sudo make modules_install
 
 # Backup old boot files
-#sudo cp -r /boot/. /home/boot_backup
+sudo cp -r /boot/. ./boot_backup
 
 #Compress boot back up file
-#sudo tar -zcvf /home/boot_backup.tar.gz /home/boot_backup
-#sudo rm -rf /home/boot_backup
+sudo tar -zcvf ./boot_backup.tar.gz ./boot_backup
+sudo rm -rf ./boot_backup
 
 # Copy final files to required destinations
-#sudo cp arch/arm/boot/dts/*.dtb /boot/
-#sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
-#sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
-#sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
+sudo cp arch/arm/boot/dts/*.dtb /boot/
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
+sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
+sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
 
 #Kill Process of vcgencmd temperature log
-kill $tempPID
+kill -15 $tempPID
 
 #sudo reboot
