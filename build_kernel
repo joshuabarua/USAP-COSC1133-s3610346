@@ -69,4 +69,5 @@ sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
 #Kill Process of vcgencmd temperature log
 kill -15 $tempPID
 
-#sudo reboot
+# Reboots sytem to enable changes
+sudo reboot
