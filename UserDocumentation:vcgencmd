@@ -1,0 +1,30 @@
+vcgencmd			User Manual			vcgencmd
+
+NAME
+	The vcgencmd script is utilised for CPU temperature logging throughout the build_kernel
+	compilation bash script runtime
+
+SYNOPSIS
+	vcgencmd logs temperatures of the pi in seconds over the duration of the build_kernel
+	scripts execution
+
+OPTIONS
+	Options are not available to the user
+
+FILES
+	vcgencmd is pulled from the github repository working hand in hand with build_kernal, 
+	from the same repository. 
+
+ENVIRONMENT
+	Variables include temperature and time, written to an external file as a log
+
+DIAGNOSTICS
+	No diagnostics
+
+BUGS
+	None available presentlz
+
+AUTHOR
+	Joshua Barua s3610346@student.rmit.edu.au
+
+Unix		Last change: OCTOBER 2020

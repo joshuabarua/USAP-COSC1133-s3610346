@@ -1,0 +1,31 @@
+build_kernel			User Manual			build_kernel
+
+NAME
+	build_kernel - Bash script for kernel compilation
+
+SYNOPSIS
+	The build_kernel bash script aims to replace the current kernel, it pulls 
+	necessary libraries from online repositories whilst logging temperature data to a 
+	seperate file. It is able to create a backup of original boot files in case of replacement. 
+
+OPTIONS
+	No options available for the user
+
+FILES
+	Repositories from linux and my own github are used
+
+ENVIRONMENT 
+	Environment variables are not used
+
+DIAGNOSTICS
+	No diagnostics available to list
+
+BUGS
+	sudo command is required at a number of stages, this may be due to a system error on my OS,
+	thus the prevalence of sudo commands often
+
+AUTHOR
+	Joshua Barua s3610346@student.rmit.edu.au
+
+Unix		Last change: OCTOBER 2020
+
