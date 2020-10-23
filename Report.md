@@ -6,7 +6,7 @@ GNUplot Version:
   - gnuplot 5.2 patchlevel 6
 
 #### CPU Temperature Image
-[![CPU Image](./assets/CPU_plot.png "CPU TEMP LOG")]
+![CPU Image](./assets/CPU_plot.png "CPU TEMP LOG")
 Commands:
 - gnuplot> set title "CPU Temp"
 - gnuplot> set xlabel "Time in Seconds"
