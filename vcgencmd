@@ -9,8 +9,8 @@ echo "Build_kernel, is running. Logging CPU temperature"
 start=$SECONDS
 
 # printf tab formatting
-printf "%s\t%s\t\n" "Time(sec)" "Temp(degC)" 
-printf "%10s\n" ".........................."
+printf "%s\t%s\t\n" "Time (Sec)" "Temp(degC)"
+printf "%10s\n" "..................."
 
 # While loop for logging
 while true
@@ -20,10 +20,7 @@ temperature=$(vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*')
 
 # Renaming long command to "time". "%s" adjusts time to epoch
 duration=$(( SECONDS - start))
-printf "%s\t\t%s\t\n" "$duration" "$temperature"
+printf "%s\t%s\t\n" "$duration" "$temperature"
 sleep 5
-# File create for storage of temp data
-touch kernel_build_temp_data 
-# Log temperatures to file
-echo "$temperature" >> kernel_build_temp_data 
+
 done

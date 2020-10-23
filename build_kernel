@@ -4,22 +4,41 @@
 
 # My github username connected with student email
 github_user="acancerouscake"
+myUser=$(whoami)
 
+
+#Add user to video group to enable vcgencmd to avoid "VCHI initialization failed"
+sudo usermod -aG video $myUser
+
+# Run temperature log script as background process
+sudo ./vcgencmd &> ./kernel_build_temp_data 
+
+# Grab process ID of vcgencmd script
+tempPID=$!
+
+# function tto kill pid for use in trap
+killFunc(){
+kill $tempPID
+exit
+}
+
+# Event handling of USR1 signal
+trap "killFunc" USR1
 
 # Get Updates
-sudo apt-get update
+#sudo apt-get update
 
 # Install binaries required
-sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make
+#sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make
 
 # Repo with linux kernel to clone
-git clone --depth=1 https://github.com/raspberrypi/linux
+#git clone --depth=1 https://github.com/raspberrypi/linux
 
 # Clone repo file with config
-git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
+#git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
 
 # Copy config file to linux repo
-cp ./USAP-COSC1133-s3610346/.config ./linux
+#cp ./USAP-COSC1133-s3610346/.config ./linux
 
 # Move into linux directory
 cd ./linux
@@ -27,23 +46,27 @@ cd ./linux
 # Kernel Version
 KERNEL=kernel7l
 
-# Kernel starts make process
-sudo make -j4 zImage modules dtbs & sudo ../USAP-COSC1133-s3610346/vcgencmd
+# Kernel starts make process 
+# Event handler for USR1 to stop gracefully after "make" has finished ***
+sudo make -j4 zImage modules dtbs
 
 # Installl modules
 sudo make modules_install
 
 # Backup old boot files
-sudo cp -r /boot/. /home/boot_backup
+#sudo cp -r /boot/. /home/boot_backup
 
 #Compress boot back up file
-sudo tar -zcvf /home/boot_backup.tar.gz /home/boot_backup
-sudo rm -rf /home/boot_backup
+#sudo tar -zcvf /home/boot_backup.tar.gz /home/boot_backup
+#sudo rm -rf /home/boot_backup
 
 # Copy final files to required destinations
-sudo cp arch/arm/boot/dts/*.dtb /boot/
-sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
-sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
-sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
+#sudo cp arch/arm/boot/dts/*.dtb /boot/
+#sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
+#sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
+#sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
 
-sudo reboot
+#Kill Process of vcgencmd temperature log
+kill $tempPID
+
+#sudo reboot
