@@ -1,6 +1,6 @@
-# CPU Temperature Report  
+# Report on Kernel Log Data  
 
-> Visual representation of cpu temperature log stored in "kernel_build_temp_data" file utilising GNUplot during compilation of "build_kernel" script.  
+> Visual representation of data logged in "kernel_build_temp_data" file utilising GNUplot during the compilation of "build_kernel" script.  
 
 GNUplot Version:  
   - gnuplot 5.2 patchlevel 6  
