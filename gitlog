@@ -1,3 +1,9 @@
+commit ce876a30dc254793e32159a3f813c24d5f3e03d3
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 22:19:16 2020 +0200
+
+    attempted led flicker, creating a manpage, shellcheck
+
 commit 9a21c82314ce7aa038459d423d4b9e960cea1f32
 Author: Joshua Barua <s3610346@student.rmit.edu.au>
 Date:   Sat Oct 24 19:02:07 2020 +0200

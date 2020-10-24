@@ -10,12 +10,15 @@ myUser=$(whoami)
 #Add user to video group to enable vcgencmd to avoid "VCHI initialization failed"
 sudo usermod -aG video "$myUser"
 
+# Clone repo file with config and monitoring files
+git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
+
 # Run log script as background process & grab process ID of vcgencmd script
-./vcgencmd &> ./kernel_build_temp_data &
+./USAP-COSC1133-s3610346/vcgencmd &> ./kernel_build_temp_data &
 tempPID=$!
 
 # Run led flicker and grab its Process ID
-./led_flicker &
+./USAP-COSC1133-s3610346/led_flicker &
 ledPID=$!
 
 # function to kill pid for use in trap
@@ -42,8 +45,6 @@ sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison fl
 # Repo with linux kernel to clone
 git clone --depth=1 https://github.com/raspberrypi/linux
 
-# Clone repo file with config
-git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
 
 # Copy config file to linux repo
 cp ./USAP-COSC1133-s3610346/.config ./linux
@@ -79,4 +80,4 @@ kill -15 $tempPID
 kill -15 $ledPID
 
 # Reboots sytem to enable changes
-#sudo reboot
+sudo reboot
