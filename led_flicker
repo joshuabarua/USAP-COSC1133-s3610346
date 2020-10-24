@@ -1,0 +1,65 @@
+#!/bin/bash
+#########################Joshua Barua s3610346#########################
+#######################################################################
+# LED Flicker script
+
+sudo sh -c "echo none > /sys/class/leds/led0/trigger" 
+sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+
+# Getting average cpu load for one minute via "Top". Grep removes unecessary points. CPU is first point in array.
+mapfile -t top_arr < <(top -b | head -n 5 | grep -Eo '[0-9]*\.[0-9]*')
+
+#Variables
+cpuLoad=${top_arr[0]}
+a=000
+b=99
+c=100
+d=199
+e=200
+f=299
+g=300
+h=399
+i=400
+
+# While loop 
+while true
+do
+# if statement converting temperature of cpu load to round number without decimal (0.40 becomes 40) 
+# Inner while is used to turn off the led on timer based on  cpu load
+
+if [[ $((10#${cpuLoad/.})) -ge $a  && $((10#${cpuLoad/.})) -le $b ]]; then
+	while true
+	do	
+	sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
+	sleep 0.2
+	sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+	done
+elif [[ $((10#${cpuLoad/.})) -ge $c  && $((10#${cpuLoad/.})) -le $d ]]; then
+	while true
+	do
+	sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
+	sleep 0.4
+	sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+	done
+elif [[ $((10#${cpuLoad/.})) -ge $e && $((10#${cpuLoad/.})) -le $f ]]; then
+	while true
+	do
+	sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
+	sleep 0.6
+	sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+	done
+elif [[ $((10#${cpuLoad/.})) -ge $g  && $((10#${cpuLoad/.})) -le $h ]]; then
+	while true
+	do
+	sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
+	sleep 0.8
+	sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
+	done
+else [[ $((10#${cpuLoad/.})) -eq $i ]];
+	while true
+	do
+	sudo sh -c "echo 1 > /sys/class/leds/led0/brightness"
+	done
+fi
+sleep 1
+done

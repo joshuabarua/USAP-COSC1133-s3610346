@@ -10,20 +10,28 @@ myUser=$(whoami)
 #Add user to video group to enable vcgencmd to avoid "VCHI initialization failed"
 sudo usermod -aG video "$myUser"
 
-# Run temperature log script as background process
+# Run log script as background process & grab process ID of vcgencmd script
 ./vcgencmd &> ./kernel_build_temp_data &
-
-# Grab process ID of vcgencmd script
 tempPID=$!
 
-# function tto kill pid for use in trap
-killFunc(){
+# Run led flicker and grab its Process ID
+./led_flicker &
+ledPID=$!
+
+# function to kill pid for use in trap
+killUSR1(){
 kill -15 $tempPID
 exit
 }
 
-# Event handling of USR1 signal
-trap "killFunc" USR1
+killUSR2(){
+kill -15 $ledPID
+exit
+}
+
+# Event handling of USR1&2 signals
+trap "killUSR1" USR1
+trap "killUSR2" USR2
 
 # Get Updates
 sudo apt-get update
@@ -66,8 +74,9 @@ sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
 sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
 sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
 
-#Kill Process of vcgencmd temperature log
+#Kill Process of vcgencmd temperature log and led flicker
 kill -15 $tempPID
+kill -15 $ledPID
 
 # Reboots sytem to enable changes
 #sudo reboot

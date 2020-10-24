@@ -1,3 +1,33 @@
+commit 9a21c82314ce7aa038459d423d4b9e960cea1f32
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 19:02:07 2020 +0200
+
+    corrected report heading
+
+commit f8173a70ca4553f8f92800555b4aeffbb1655565
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 19:00:02 2020 +0200
+
+    corrected graph png reference
+
+commit 56da3d852f39cd320e2e928224774d075b6dda6d
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 18:54:58 2020 +0200
+
+    reran scripts for more data points via GNUPlot, adjusted report accordingly
+
+commit ffdd27076543e8b2848dd1d3039a5ab661dc9a87
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 18:11:12 2020 +0200
+
+    applied shellcheck adjustments
+
+commit 627e5d7bffea165a647f4529f8b7163a7dc83e30
+Author: Joshua Barua <s3610346@student.rmit.edu.au>
+Date:   Sat Oct 24 00:48:17 2020 +0200
+
+    Added git log
+
 commit 552c5bd136f4245b7e2d79f0634cd7abd95cdc96
 Author: Joshua Barua <s3610346@student.rmit.edu.au>
 Date:   Sat Oct 24 00:47:07 2020 +0200

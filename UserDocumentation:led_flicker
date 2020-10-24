@@ -1,0 +1,29 @@
+led_flicker			User Manual			led_flicker
+
+NAME
+	led_flicker - Bash script for led flickering on raspbery pi
+
+SYNOPSIS
+	The aim for led_flicker is to alternate between rates of led flicker based on cpu load
+
+OPTIONS
+	No options available for the user
+
+FILES
+	Require running of build_kernel to be used
+
+ENVIRONMENT 
+	Environment variables are not used
+
+DIAGNOSTICS
+	No diagnostics available to list
+
+BUGS
+	The rate of flicker may not run correctly due to the difficulty of task.
+	It flickers to begin with, but total testing was incomplete at time of submission
+
+AUTHOR
+	Joshua Barua s3610346@student.rmit.edu.au
+
+Unix	Last change: OCTOBER 2020
+
