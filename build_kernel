@@ -1,6 +1,6 @@
 #!/bin/bash
 ######################### Joshua Barua s3610346 #########################
-#######################################################################
+#########################################################################
 
 # My github username connected with student email
 github_user="acancerouscake"
@@ -8,7 +8,7 @@ myUser=$(whoami)
 
 
 #Add user to video group to enable vcgencmd to avoid "VCHI initialization failed"
-sudo usermod -aG video $myUser
+sudo usermod -aG video "$myUser"
 
 # Run temperature log script as background process
 ./vcgencmd &> ./kernel_build_temp_data &
@@ -40,8 +40,8 @@ git clone --depth=1 https://github.com/$github_user/USAP-COSC1133-s3610346
 # Copy config file to linux repo
 cp ./USAP-COSC1133-s3610346/.config ./linux
 
-# Move into linux directory
-cd ./linux
+# Move into linux directory or exit (based on shellcheck)
+cd ./linux || exit
 
 # Kernel Version
 KERNEL=kernel7l
@@ -70,4 +70,4 @@ sudo cp arch/arm/boot/zImage /boot/$KERNEL.img
 kill -15 $tempPID
 
 # Reboots sytem to enable changes
-sudo reboot
+#sudo reboot

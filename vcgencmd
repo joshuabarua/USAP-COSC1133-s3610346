@@ -9,18 +9,28 @@ echo "Build_kernel, is running. Logging CPU temperature"
 start=$SECONDS
 
 # printf tab formatting
-printf "%s\t%s\n" "Time(Sec)" "Temp(degC)"
-printf "%10s\n" ".........................."
+printf "%s\t%s\t%s\t%s\t%s\n" "Time(Sec)" "CPU Temp(degC)" "Hertz(MHz)" "Voltage(V)" "Oscillator Temp(degC)" 
+printf "%10s\n" "....................................................................................."
 
 # While loop for logging
 while true
 do
-# Renaming long command to "temp". egrep removes "'C"
-temperature=$(vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*')
+# Get CPU Temperature and assign to variable. egrep removes "'C"
+temperature=$(vcgencmd measure_temp | grep -Eo '[0-9]*\.[0-9]*')
+
+# Add current speed voltage and temperature of ring oscillator to array
+mapfile -t ring_osc < <(vcgencmd read_ring_osc | grep -Eo '[0-9]*\.[0-9]*')
+
+# Assign variables based on array position (data is for comparison)
+megaHertz=${ring_osc[0]}
+voltage=${ring_osc[1]}
+osc_temperature=${ring_osc[2]}
+
+
 
 # Renaming long command to "time". "%s" adjusts time to epoch
 duration=$(( SECONDS - start))
-printf "%s\t\t%s\n" "$duration" "$temperature"
-sleep 5
+printf "%s\t\t%s\t\t%s\t\t%s\t\t%s\n" "$duration" "$temperature" "$megaHertz" "$voltage" "$osc_temperature"
+sleep 1
 
 done
